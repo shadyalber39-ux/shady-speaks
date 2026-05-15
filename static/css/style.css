@@ -17,3 +17,65 @@ footer{width:min(1220px,calc(100% - 34px));margin:auto;border-top:1px solid var(
     margin-top: 10px;
     font-size: 13px;
 }
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .hero {
+        flex-direction: column;
+        gap: 40px;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        line-height: 1.1;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
+    .projects-grid,
+    .reels-grid,
+    .feedback-wall {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card img,
+    .reel-card img {
+        height: auto;
+    }
+
+    .book {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    nav {
+        padding: 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+}
