@@ -56,7 +56,11 @@ class Reel(db.Model):
     cover_image = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-
+class SocialLink(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    platform = db.Column(db.String(100), nullable=False)
+    url = db.Column(db.String(500), nullable=False)
+    
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=True)
