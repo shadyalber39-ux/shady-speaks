@@ -52,10 +52,13 @@ footer{width:min(1220px,calc(100% - 34px));margin:auto;border-top:1px solid var(
         grid-template-columns: 1fr;
     }
 
-    .project-card img,
-    .reel-card img {
-        height: auto;
-    }
+.project-card img,
+.reel-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: #000;
+}
 
     .book {
         grid-template-columns: 1fr;
