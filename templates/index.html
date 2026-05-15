@@ -8,7 +8,11 @@
         <p>I’m Shady, a voice-over artist and storyteller creating emotional, cinematic, and authentic audio experiences — from personal messages to spiritual storytelling and commercial work.</p>
         <div class="actions">
             <a class="btn yellow" href="#projects">View Projects</a>
-            <a class="btn white" href="https://www.instagram.com/shadyalber39/" target="_blank">Instagram</a>
+           {% for link in social_links %}
+<a class="btn white" href="{{ link.url }}" target="_blank">
+    {{ link.platform }}
+</a>
+{% endfor %}
             <a class="btn outline" href="#book">Book a Voice</a>
         </div>
     </div>
