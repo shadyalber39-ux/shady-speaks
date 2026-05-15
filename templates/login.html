@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="login-page">
+<form class="admin-form login-card" method="POST">
+    <span class="pill">Private Dashboard</span>
+    <h1>Admin Login</h1>
+    <label>Email</label>
+    <input name="email" type="email">
+    <label>Password</label>
+    <input name="password" type="password">
+    <button>Login</button>
+</form>
+</main>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} | SHADY SPEAKS{% endblock %}
+{% block content %}
+<main>
+<section class="project-hero">
+    <a class="back" href="{{ url_for('home') }}#projects">← Back to Projects</a>
+    <div class="project-hero-grid">
+        <div>
+            <span class="pill">{{ project.subtitle }}</span>
+            <h1>{{ project.title }}</h1>
+            <p>{{ project.long_description }}</p>
+        </div>
+        <div class="project-big-cover">
+            {% if project.cover_image %}
+            <img src="{{ url_for('static', filename=project.cover_image) }}" alt="{{ project.title }}">
+            {% endif %}
+            <span>SHADY SPEAKS</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <span class="pill">Reels Gallery</span>
+    <h2>Watch the work on Instagram</h2>
+    <div class="reels-grid">
+        {% for reel in project.reels %}
+        <article class="reel-card">
+            <div class="reel-cover">
+                {% if reel.cover_image %}
+                <img src="{{ url_for('static', filename=reel.cover_image) }}" alt="{{ reel.title }}">
+                {% else %}
+                <span>Reel</span>
+                {% endif %}
+            </div>
+            <div>
+                <h3>{{ reel.title }}</h3>
+                <p>{{ reel.description }}</p>
+                <a href="{{ reel.instagram_url }}" target="_blank">Watch on Instagram →</a>
+            </div>
+        </article>
+        {% else %}
+        <p>No reels yet. Add reels from Admin.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <span class="pill">Project Feedback</span>
+    <h2>Your feedback matters.</h2>
+    <div class="feedback-layout">
+        <form action="{{ url_for('feedback') }}" method="POST" class="dark-form">
+            <input type="hidden" name="project_id" value="{{ project.id }}">
+            <input name="name" placeholder="Your name (optional)">
+            <textarea name="message" placeholder="Write your feedback..."></textarea>
+            <button>Send Feedback</button>
+        </form>
+        <div class="feedback-wall">
+            {% for item in feedback_items %}
+            <div class="feedback-card">
+                <p>“{{ item.message }}”</p>
+                <small>{{ item.name or "Anonymous Feedback" }}</small>
+            </div>
+            {% else %}
+            <div class="feedback-card">Be the first one to leave feedback.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+</main>
+{% endblock %}

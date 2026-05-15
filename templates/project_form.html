@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="admin-page">
+<span class="pill">Admin</span>
+<h1>{% if project %}Edit Project{% else %}Add Project{% endif %}</h1>
+<form class="admin-form" method="POST" enctype="multipart/form-data">
+    <label>Project title</label>
+    <input name="title" value="{{ project.title if project else '' }}">
+    <label>Subtitle / Category</label>
+    <input name="subtitle" value="{{ project.subtitle if project else '' }}">
+    <label>Short description</label>
+    <textarea name="short_description">{{ project.short_description if project else '' }}</textarea>
+    <label>Long description</label>
+    <textarea name="long_description">{{ project.long_description if project else '' }}</textarea>
+    <label>Project Cover Image</label>
+    <small>Upload any image. Recommended: 1600 × 900 px.</small>
+    {% if project and project.cover_image %}
+    <div class="preview"><img src="{{ url_for('static', filename=project.cover_image) }}"></div>
+    {% endif %}
+    <input name="cover_image" type="file" accept="image/*">
+    <button>Save Project</button>
+    <a class="back" href="{{ url_for('admin') }}">← Back to Admin</a>
+</form>
+</main>
+{% endblock %}

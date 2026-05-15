@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SHADY SPEAKS{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SHADY SPEAKS">
+    </a>
+    <nav>
+        <a href="{{ url_for('home') }}#projects">Projects</a>
+        <a href="{{ url_for('home') }}#feedback">Feedback</a>
+        <a href="{{ url_for('home') }}#book">Book a Voice</a>
+        {% if session.get("admin_logged_in") %}
+        <a href="{{ url_for('admin') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </nav>
+</header>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="toast">{{ messages[0] }}</div>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    <p>© 2026 SHADY SPEAKS</p>
+    <div>
+        <a href="mailto:shadyalber39@gmail.com">Email</a>
+        <a href="https://www.instagram.com/shadyalber39/" target="_blank">Instagram</a>
+    </div>
+</footer>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

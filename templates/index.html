@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+<section class="hero">
+    <div>
+        <span class="pill">Real Feelings. Said Out Loud.</span>
+        <h1>Every feeling has a voice. I just help it speak.</h1>
+        <p>I’m Shady, a voice-over artist and storyteller creating emotional, cinematic, and authentic audio experiences — from personal messages to spiritual storytelling and commercial work.</p>
+        <div class="actions">
+            <a class="btn yellow" href="#projects">View Projects</a>
+            <a class="btn white" href="https://www.instagram.com/shadyalber39/" target="_blank">Instagram</a>
+            <a class="btn outline" href="#book">Book a Voice</a>
+        </div>
+    </div>
+    <div class="hero-card">
+        <span>SHADY SPEAKS</span>
+        <div class="bars">{% for i in range(32) %}<i style="height: {{ 20 + ((i*17)%90) }}px"></i>{% endfor %}</div>
+        <h2>Voice Over • Storytelling • Reels</h2>
+        <p>Cinematic voice work for stories that deserve to be heard.</p>
+    </div>
+</section>
+
+<section id="projects" class="section">
+    <span class="pill">Projects</span>
+    <h2>My voice-over world</h2>
+    <p class="section-desc">Choose a project to explore its reels and watch them directly on Instagram.</p>
+
+    <div class="projects-grid">
+        {% for project in projects %}
+        <a class="project-card" href="{{ url_for('project_page', slug=project.slug) }}">
+            <div class="project-cover">
+                {% if project.cover_image %}
+                <img src="{{ url_for('static', filename=project.cover_image) }}" alt="{{ project.title }}">
+                {% endif %}
+                <span>{{ project.subtitle }}</span>
+            </div>
+            <div class="project-body">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.short_description }}</p>
+                <strong>Open Project →</strong>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="feedback" class="section feedback-section">
+    <span class="pill">Audience Feedback</span>
+    <h2>Anonymous reactions, real opinions.</h2>
+    <p class="section-desc">Your feedback matters.</p>
+    <div class="feedback-layout">
+        <form action="{{ url_for('feedback') }}" method="POST" class="dark-form">
+            <input name="name" placeholder="Your name (optional)">
+            <textarea name="message" placeholder="Write your feedback..."></textarea>
+            <button>Send Feedback</button>
+        </form>
+        <div class="feedback-wall">
+            {% if feedback_items %}
+                {% for item in feedback_items %}
+                <div class="feedback-card">
+                    <p>“{{ item.message }}”</p>
+                    <small>{{ item.name or "Anonymous Feedback" }}</small>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="feedback-card">“الصوت هادي ومؤثر جدًا، حسيته حقيقي.”</div>
+                <div class="feedback-card">“حكاية ترنيمة مختلفة وبتدخل القلب.”</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section id="book" class="book">
+    <div>
+        <span class="pill dark">Book a Voice</span>
+        <h2>Need a voice that sounds human, warm, and real?</h2>
+        <p>Tell us about your project, and someone will reach out to you as soon as possible.</p>
+    </div>
+    <form action="{{ url_for('request_service') }}" method="POST">
+        <input name="name" placeholder="Your name">
+        <input name="phone" placeholder="Phone number">
+        <input name="email" placeholder="Email address">
+        <select name="service_type">
+            <option>Voice Over for Reel</option>
+            <option>Ads / Commercial</option>
+            <option>Storytelling Narration</option>
+            <option>Spiritual Content</option>
+        </select>
+        <textarea name="message" placeholder="Tell me about your project"></textarea>
+        <button>Send Request</button>
+    </form>
+</section>
+</main>
+{% endblock %}

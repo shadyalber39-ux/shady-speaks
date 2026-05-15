@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="admin-page">
+<span class="pill">Admin</span>
+<h1>{% if reel %}Edit Reel{% else %}Add Reel{% endif %}</h1>
+<form class="admin-form" method="POST" enctype="multipart/form-data">
+    <label>Reel title</label>
+    <input name="title" value="{{ reel.title if reel else '' }}">
+    <label>Reel description</label>
+    <textarea name="description">{{ reel.description if reel else '' }}</textarea>
+    <label>Instagram URL</label>
+    <input name="instagram_url" value="{{ reel.instagram_url if reel else '' }}">
+    <label>Reel Cover Image</label>
+    {% if reel and reel.cover_image %}
+    <div class="preview"><img src="{{ url_for('static', filename=reel.cover_image) }}"></div>
+    {% endif %}
+    <input name="cover_image" type="file" accept="image/*">
+    <button>Save Reel</button>
+    <a class="back" href="{{ url_for('admin') }}">← Back to Admin</a>
+</form>
+</main>
+{% endblock %}

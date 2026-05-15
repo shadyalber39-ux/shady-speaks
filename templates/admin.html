@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="admin-page">
+<span class="pill">Admin</span>
+<h1>Edit your website content</h1>
+<p class="section-desc">Add projects, covers, Instagram reels, and view service requests.</p>
+<div class="actions">
+    <a class="btn yellow" href="{{ url_for('new_project') }}">+ Add Project</a>
+    <a class="btn outline" href="{{ url_for('home') }}">View Website</a>
+    <a class="btn outline" href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+<section class="admin-section">
+<h2>Projects & Reels</h2>
+{% for project in projects %}
+<div class="admin-card">
+    <div class="admin-cover">
+        {% if project.cover_image %}
+        <img src="{{ url_for('static', filename=project.cover_image) }}" alt="{{ project.title }}">
+        {% endif %}
+    </div>
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.short_description }}</p>
+    <div class="admin-actions">
+        <a href="{{ url_for('project_page', slug=project.slug) }}">Open</a>
+        <a href="{{ url_for('edit_project', project_id=project.id) }}">Edit Project</a>
+        <a href="{{ url_for('new_reel', project_id=project.id) }}">+ Add Reel</a>
+        <form method="POST" action="{{ url_for('delete_project', project_id=project.id) }}" onsubmit="return confirm('Delete project?')"><button class="danger">Delete</button></form>
+    </div>
+    <div class="reel-list">
+        {% for reel in project.reels %}
+        <div>
+            <span>{{ reel.title }}</span>
+            <a href="{{ url_for('edit_reel', reel_id=reel.id) }}">Edit</a>
+            <form method="POST" action="{{ url_for('delete_reel', reel_id=reel.id) }}" onsubmit="return confirm('Delete reel?')"><button class="danger small">Delete</button></form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+</section>
+
+<section class="admin-section">
+<h2>Service Requests</h2>
+<div class="admin-grid">
+{% for req in requests %}
+<div class="admin-card"><h3>{{ req.name }}</h3><p>{{ req.phone }}</p><p>{{ req.email }}</p><p>{{ req.service_type }}</p><p>{{ req.message }}</p></div>
+{% else %}<p>No requests yet.</p>{% endfor %}
+</div>
+</section>
+
+<section class="admin-section">
+<h2>Feedback</h2>
+<div class="admin-grid">
+{% for item in feedback_items %}
+<div class="admin-card"><p>“{{ item.message }}”</p><small>{{ item.name or "Anonymous" }}</small></div>
+{% else %}<p>No feedback yet.</p>{% endfor %}
+</div>
+</section>
+</main>
+{% endblock %}
