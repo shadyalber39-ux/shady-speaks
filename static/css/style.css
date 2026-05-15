@@ -65,6 +65,14 @@ footer{width:min(1220px,calc(100% - 34px));margin:auto;border-top:1px solid var(
     aspect-ratio: 9 / 16;
 }
 
+    .reel-card {
+    overflow: visible;
+}
+
+.reel-card img {
+    display: block;
+}
+
     .book {
         grid-template-columns: 1fr;
         padding: 30px 20px;
