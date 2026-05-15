@@ -11,7 +11,8 @@ app = Flask(__name__, instance_relative_config=True)
 app.secret_key = "shady-speaks-clean-v13"
 
 Path(app.instance_path).mkdir(parents=True, exist_ok=True)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(Path(app.instance_path) / "shady_speaks.db")
+import os
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL") or "sqlite:///" + str(Path(app.instance_path) / "shady_speaks.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 PROJECT_UPLOAD_DIR = Path(app.root_path) / "static" / "uploads" / "projects"
