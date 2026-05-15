@@ -138,7 +138,6 @@ def seed_projects():
 
 with app.app_context():
     db.create_all()
-    ensure_columns()
     seed_projects()
 
 
