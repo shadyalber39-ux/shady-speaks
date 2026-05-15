@@ -136,3 +136,25 @@ footer{width:min(1220px,calc(100% - 34px));margin:auto;border-top:1px solid var(
         padding: 60px 20px;
     }
 }
+    /* FINAL MOBILE IMAGE FIX */
+@media (max-width: 768px) {
+  .project-card img,
+  .project-hero img,
+  .project-cover img,
+  .reel-card img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 22px !important;
+    background: #000 !important;
+  }
+
+  .project-card,
+  .reel-card,
+  .project-hero,
+  .project-cover {
+    overflow: hidden !important;
+  }
+}
