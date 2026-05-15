@@ -100,16 +100,6 @@ def save_image(file_storage, folder):
         return f"uploads/projects/{new_name}"
     return f"uploads/reels/{new_name}"
 
-
-
-def ensure_columns():
-    with db.engine.connect() as connection:
-        feedback_cols = [row[1] for row in connection.exec_driver_sql("PRAGMA table_info(feedback)").fetchall()]
-        if "name" not in feedback_cols:
-            connection.exec_driver_sql("ALTER TABLE feedback ADD COLUMN name VARCHAR(150)")
-        connection.commit()
-
-
 def seed_projects():
     if Project.query.count() > 0:
         return
