@@ -145,7 +145,14 @@ with app.app_context():
 def home():
     projects = Project.query.order_by(Project.created_at.asc()).all()
     feedback_items = Feedback.query.order_by(Feedback.created_at.desc()).limit(4).all()
-    return render_template("index.html", projects=projects, feedback_items=feedback_items)
+    social_links = SocialLink.query.all()
+
+    return render_template(
+        "index.html",
+        projects=projects,
+        feedback_items=feedback_items,
+        social_links=social_links
+    )
 
 
 @app.route("/projects/<slug>")
