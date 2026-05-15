@@ -10,6 +10,27 @@
     <a class="btn outline" href="{{ url_for('logout') }}">Logout</a>
 </div>
 
+
+    <section class="admin-section">
+  <h2>Social Links</h2>
+
+  <form class="admin-form" method="POST" action="{{ url_for('add_social_link') }}">
+    <input name="platform" placeholder="Instagram / TikTok / YouTube" required>
+    <input name="url" placeholder="https://..." required>
+    <button type="submit">+ Add Social Link</button>
+  </form>
+
+  {% for link in social_links %}
+  <div class="admin-card">
+    <h3>{{ link.platform }}</h3>
+    <p>{{ link.url }}</p>
+
+    <form method="POST" action="{{ url_for('delete_social_link', link_id=link.id) }}">
+      <button class="danger" type="submit">Delete</button>
+    </form>
+  </div>
+  {% endfor %}
+</section>
 <section class="admin-section">
 <h2>Projects & Reels</h2>
 {% for project in projects %}
