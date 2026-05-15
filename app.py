@@ -353,5 +353,29 @@ def delete_reel(reel_id):
     return redirect(url_for("admin"))
 
 
+@app.route("/add-social-link", methods=["POST"])
+def add_social_link():
+    platform = request.form.get("platform")
+    url = request.form.get("url")
+
+    if platform and url:
+        social = SocialLink(
+            platform=platform,
+            url=url
+        )
+        db.session.add(social)
+        db.session.commit()
+
+    return redirect(url_for("admin"))
+
+
+@app.route("/delete-social-link/<int:link_id>", methods=["POST"])
+def delete_social_link(link_id):
+    link = SocialLink.query.get_or_404(link_id)
+
+    db.session.delete(link)
+    db.session.commit()
+
+    return redirect(url_for("admin"))
 if __name__ == "__main__":
     app.run(debug=True)
